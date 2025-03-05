@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul>
+        <% if (users.length > 0) { %>
+            <% users.forEach(user => { %>
+                <li><%= user.name %> - <a href="/users/delete/<%= user.id %>">Eliminar</a></li>
+            <% }); %>
+        <% } else { %>
+            <li>No hay usuarios registrados.</li>
+        <% } %>
+    </ul>
+    <form action="/users/create" method="POST">
+        <input type="text" name="name" placeholder="Nombre" required>
+        <button type="submit">Agregar Usuario</button>
+    </form>
+    <br>
+    <a href="/">Volver a la Página Principal</a>
+</body>
+</html>
