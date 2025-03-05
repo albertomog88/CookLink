@@ -19,6 +19,35 @@ exports.createUser = async (req, res, next) => {
         next(err);
     }
 };
+//rEDICECCION A LA PAGINA DE REGISTRO
+exports.toRegistro = async (req, res, next) => {
+    try {
+        //const { name } = req.body;
+
+        //console.log(req.body);
+        res.render('registro');
+        //await UserService.createUser(name);
+        //res.redirect('/users');
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+
+exports.registroUser = async (req, res, next) => {
+    try {
+        //const { name } = req.body;
+        const { username, email, password } = req.body;
+        console.log(req.body);
+        //res.render('registro');
+        await UserService.registroUser(req.body);
+        //res.redirect('/users');
+    } catch (err) {
+        next(err);
+    }
+};
+
 
 
 // exports.deleteUser = async (req, res, next) => {
