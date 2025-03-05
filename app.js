@@ -15,9 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware para mostrar las rutas por consola
 app.use(logRoutes);
 
-//USO DELETE
-// const methodOverride = require('method-override');
-// app.use(methodOverride('_method'));
+
+
 
 
 // Configurar Express y motor de vistas

@@ -20,6 +20,7 @@ exports.createUser = async (req, res, next) => {
     }
 };
 
+
 // exports.deleteUser = async (req, res, next) => {
 //     try {
 //         const { id } = req.params;
@@ -40,3 +41,4 @@ exports.deleteUser = async (req, res, next) => {
     }
   };
   
+
