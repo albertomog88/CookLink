@@ -1,0 +1,44 @@
+// app.js - Archivo principal
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const app = express();
+const errorHandler = require('./middlewares/errorHandler');
+const loadRoutes = require('./config/routes');
+const config = require('./config/config');
+const logRoutes = require('./middlewares/logRoutes'); // Importa el middleware
+
+// Middleware para parsear JSON y datos de formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware para mostrar las rutas por consola
+app.use(logRoutes);
+
+//USO DELETE
+// const methodOverride = require('method-override');
+// app.use(methodOverride('_method'));
+
+
+// Configurar Express y motor de vistas
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Cargar rutas de forma modular
+loadRoutes(app);
+
+// Middleware centralizado de manejo de errores
+app.use(errorHandler);
+
+const port = config.port;
+app.listen(port, () => {
+    console.log(`Servidor en ejecución en http://localhost:${port}`);
+});
+
+
+// middlewares/errorHandler.js
+module.exports = (err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status || 500).render('error', { error: err.message, status: err.status || 500 });
+};
