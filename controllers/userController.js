@@ -16,18 +16,14 @@ exports.createUser = async (req, res, next) => {
         await UserService.createUser(name);
         res.redirect('/users');
     } catch (err) {
-        next(err);
+       next(err);
+        
     }
 };
 //rEDICECCION A LA PAGINA DE REGISTRO
 exports.toRegistro = async (req, res, next) => {
     try {
-        //const { name } = req.body;
-
-        //console.log(req.body);
-        res.render('registro');
-        //await UserService.createUser(name);
-        //res.redirect('/users');
+        res.render('registro', { mensajeError: null });
     } catch (err) {
         next(err);
     }
@@ -37,14 +33,17 @@ exports.toRegistro = async (req, res, next) => {
 
 exports.registroUser = async (req, res, next) => {
     try {
-        //const { name } = req.body;
+        
         const { username, email, password } = req.body;
         console.log(req.body);
-        //res.render('registro');
+        
         await UserService.registroUser(req.body);
         //res.redirect('/users');
+        res.render('registro', { mensajeError: null});
     } catch (err) {
-        next(err);
+        
+        console.error("Error al crear usuario:", err.message);
+        res.render('registro', { mensajeError: err.message}); // Renderiza la vista con el error
     }
 };
 

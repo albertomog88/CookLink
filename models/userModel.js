@@ -15,18 +15,36 @@ const User = {
         try {
             return await db.query(`INSERT INTO ${nombreTabla} SET ?`, user);
         } catch (error) {
-            throw new Error('Error al crear el usuario');
+            throw new Error('CREATE Error al crear el usuario');
         }
     },
 
-    
-    registro: async ({ username, email, password }) => {
-        //const { username, email, password } = body;
-        
+    //getByUsername
+    getByUsername: async (username) => {
         try {
-            return await db.query(`INSERT INTO ${nombreTabla} (username, email, password) VALUES (?, ?, ?)`, [username, email, password]);
+            console.log('Datos recibidos en el modelo:', { username });
+            const sql = `SELECT username FROM ${nombreTabla} WHERE username = ?`;
+            //const [result] = await db.query(sql, [username]); // Destructuring para obtener solo el resultado
+            return await db.query(sql, [username]);; 
         } catch (error) {
-            throw new Error('Error al crear el usuario');
+            console.error('Error al buscar usuario por username:', error);
+            throw new Error('Error al buscar usuario');
+        }
+    },
+    
+    
+    
+
+    registro: async ({ username,  password }) => {
+        //const { username, email, password } = body;
+        console.log('Datos recibidos en el modelo:', { username, password });
+
+        try {
+            const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
+            return await db.query(sql, [username,  password]);
+        } catch (error) {
+            console.error('Error completo:', error);
+            throw new Error('registro Error al crear el usuario');
         }
     },
     delete: async (id) => {

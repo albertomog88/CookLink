@@ -4,9 +4,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 
-// /users/
+// /users
 router.get('/', userController.getAllUsers);
-// /users/
+
 router.get('/registro', userController.toRegistro);
 
 

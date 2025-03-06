@@ -53,7 +53,7 @@
                             <ul class="list-group">
                                 <% users.forEach(user => { %>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <%= user.username %>
+                                        <%= user.username %> - <%= user.password %>
                                         <!-- <a href="/users/delete/<%= user.id %>" class="btn btn-danger btn-sm">Eliminar</a> -->
                                         <a href="#" onclick="eliminarUsuario('<%= user.id %>')" class="btn btn-danger btn-sm">Eliminar Usuario</a>
 
