@@ -4,15 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
+    <title>CookLink</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content {
+            margin-top: 80px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Bienvenido a la Página Principal</h1>
-    <nav>
-        <ul>
-            <li><a href="/users">Lista de Usuarios</a></li>
-            <li><a href="/users/registro">Registro</a></li>
-        </ul>
+<body class="text-center bg-light p-5">
+    <!-- ESTO SERÍA PONERLO EN UN EJS SÓLO PARA EL NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">CookLink</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">Lista de Usuarios</a>
+                    </li>
+                    <!-- AQUÍ EL RESTO DE ENLACES Y FALTA UN MENÚ HAMBURGUESA Y UN SEARCH ETC -->
+                </ul>
+            </div>
+        </div>
     </nav>
+    <!-- ESTO SERÍA PONERLO EN UN EJS SÓLO PARA EL NAV -->
+    <div class="container content">
+        <!-- <h1 class="mb-4 p-3 bg-dark text-white">Bienvenido a CookLink!</h1> -->
+        <h3 class="mb-4">Inicie sesión o regístrese a continuación:</h3>
+        <a href="/users">Lista de Usuarios</a>
+        <nav>
+            <a href="/#" class="btn btn-primary btn-lg m-2">Inicio de sesión</a>
+            <a href="/users/registro" class="btn btn-primary btn-lg m-2">Registro</a>
+        </nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
