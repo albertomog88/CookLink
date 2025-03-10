@@ -49,7 +49,6 @@ INSERT INTO `usuarios` (`id`, `username`, `password`) VALUES
 (9, 'sofia_torres', 'clave7890'),
 (10, 'david_ruiz', 'secreto1234'),
 (11, 'alberto', '1234');
-
 --
 -- Índices para tablas volcadas
 --
