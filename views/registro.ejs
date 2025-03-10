@@ -60,11 +60,7 @@
 </head>
 <body class="bg-light">
     <%- include("fragments/nav") %>
-    <% if (mensajeError) { %>
-        <div class="alert alert-danger">
-            <%= mensajeError %>
-        </div>
-        <% } %>
+    
         
     <div class="container content py-5">
         <div class="row justify-content-center">
@@ -104,6 +100,12 @@
             </div>
         </div>
     </div>
+
+    <% if (mensajeError) { %>
+        <div class="alert alert-danger">
+            <%= mensajeError %>
+        </div>
+        <% } %>
 
     <script>
     // Validación de Bootstrap

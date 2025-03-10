@@ -1,6 +1,7 @@
 // controllers/userController.js
 const UserService = require('../services/userService');
 const { body, validationResult } = require('express-validator');
+const { renderView } = require('../middlewares/viewHelper'); // Importamos la función centralizada
 
 exports.getAllUsers = async (req, res, next) => {
     try {
@@ -24,7 +25,8 @@ exports.createUser = async (req, res, next) => {
 //rEDICECCION A LA PAGINA DE REGISTRO
 exports.toRegistro = async (req, res, next) => {
     try {
-        res.render('registro', { mensajeError: null });
+        //res.render('registro', { mensajeError: null });
+        renderView(res, 'registro');
     } catch (err) {
         next(err);
     }
@@ -37,9 +39,12 @@ exports.registroUser = async (req, res, next) => {
      // Capturar errores de validación
      const errors = validationResult(req);
      if (!errors.isEmpty()) {
-         return res.render('registro', { 
-             mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
-         });
+        //  return res.render('registro', { 
+        //      mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
+        //  });
+        return renderView(res, 'registro', { 
+            mensajeError: errors.array().map(err => err.msg).join('. ') 
+        });
      }
     
     try {
@@ -49,15 +54,15 @@ exports.registroUser = async (req, res, next) => {
         
         await UserService.registroUser(req.body);
         //res.redirect('/users');
-        res.render('registro', 
-            { 
-                mensajeError: null});
+        renderView(res, 'registro', { mensajeExito: "Usuario registrado correctamente." });
+
     } catch (err) {
         
         console.error("Error al crear usuario:", err.message);
-        res.render('registro', 
-            { 
-                mensajeError: err.message}); // Renderiza la vista con el error
+        // res.render('registro', 
+        //     { 
+        //         mensajeError: err.message}); // Renderiza la vista con el error
+        renderView(res, 'registro', { mensajeError: messages.errors.userCreationError });
     }
 };
 
