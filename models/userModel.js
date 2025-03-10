@@ -8,7 +8,7 @@ const User = {
         try {
             return await db.query(`SELECT * FROM ${nombreTabla}`);
         } catch (error) {
-            throw new Error(error.message);
+            throw error;
         }
     },
     create: async (user) => {
