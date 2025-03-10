@@ -8,13 +8,15 @@ const User = {
         try {
             return await db.query(`SELECT * FROM ${nombreTabla}`);
         } catch (error) {
-            throw error;
+            console.log(error);
+            throw Error('Error al obtener todos los usuarios');
         }
     },
     create: async (user) => {
         try {
             return await db.query(`INSERT INTO ${nombreTabla} SET ?`, user);
         } catch (error) {
+            console.log(error);
             throw new Error('CREATE Error al crear el usuario');
         }
     },
@@ -27,7 +29,7 @@ const User = {
             //const [result] = await db.query(sql, [username]); // Destructuring para obtener solo el resultado
             return await db.query(sql, [username]);; 
         } catch (error) {
-            console.error('Error al buscar usuario por username:', error);
+            console.log(error);
             throw new Error('Error al buscar usuario');
         }
     },
@@ -43,7 +45,7 @@ const User = {
             const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
             return await db.query(sql, [username,  password]);
         } catch (error) {
-            console.error('Error completo:', error);
+            console.log(error);
             throw new Error('registro Error al crear el usuario');
         }
     },
@@ -51,6 +53,7 @@ const User = {
         try {
             return await db.query(`DELETE FROM ${nombreTabla} WHERE id = ?`, [id]);
         } catch (error) {
+            console.log(error);
             throw new Error('Error al eliminar el usuario');
         }
     }
