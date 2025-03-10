@@ -1,5 +1,6 @@
 // controllers/userController.js
 const UserService = require('../services/userService');
+const { body, validationResult } = require('express-validator');
 
 exports.getAllUsers = async (req, res, next) => {
     try {
@@ -32,6 +33,15 @@ exports.toRegistro = async (req, res, next) => {
 
 
 exports.registroUser = async (req, res, next) => {
+    
+     // Capturar errores de validación
+     const errors = validationResult(req);
+     if (!errors.isEmpty()) {
+         return res.render('registro', { 
+             mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
+         });
+     }
+    
     try {
         
         const { username, email, password } = req.body;
@@ -39,11 +49,15 @@ exports.registroUser = async (req, res, next) => {
         
         await UserService.registroUser(req.body);
         //res.redirect('/users');
-        res.render('registro', { mensajeError: null});
+        res.render('registro', 
+            { 
+                mensajeError: null});
     } catch (err) {
         
         console.error("Error al crear usuario:", err.message);
-        res.render('registro', { mensajeError: err.message}); // Renderiza la vista con el error
+        res.render('registro', 
+            { 
+                mensajeError: err.message}); // Renderiza la vista con el error
     }
 };
 
