@@ -57,6 +57,8 @@
         }
 
     </style>
+
+
 </head>
 <body class="bg-light">
     <!-- NavBar -->
@@ -106,7 +108,10 @@
         <div class="alert alert-danger">
             <%= mensajeError %>
         </div>
-        <% } %>
+    <% } %>
+    <% if (mensajeExito) { %>
+        <div class="alert alert-success"><%= mensajeExito %></div>
+    <% } %>
 
     <script>
     // Validación de Bootstrap
