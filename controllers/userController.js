@@ -62,7 +62,7 @@ exports.registroUser = async (req, res, next) => {
         // res.render('registro', 
         //     { 
         //         mensajeError: err.message}); // Renderiza la vista con el error
-        renderView(res, 'registro', { mensajeError: messages.errors.userCreationError });
+        renderView(res, 'registro', { mensajeError: err.message });
     }
 };
 
