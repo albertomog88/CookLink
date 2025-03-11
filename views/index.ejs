@@ -6,58 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CookLink</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style> 
-    /* ESTO PASARLO A UN ARCHIVO CSS */
-        
-        body {
-            background: url('https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/es/cms/SEO/recipes/ensalada_de_judias_con_jamon_y_langostinos.jpeg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(116, 112, 112, 0.5); /* Capa blanca con opacidad */
-            z-index: -1;
-        }
-
-        .content {
-            margin-top: 80px;
-        }
-
-        h1 {
-            background: #D22F2F;
-            padding: 15px;
-            border-radius: 10px;
-            color: white;
-        }
-
-        .btn-custom {
-            background-color: #9B1C1C !important;
-            border-color: #9B1C1C !important;
-            color: white !important;
-        }
-
-        .btn-custom:hover {
-            background-color: #7E1616 !important;
-            border-color: #7E1616 !important;
-        }
-
-        .btn-light-custom {
-            background-color: #D22F2F !important;
-            border-color: #D22F2F !important;
-            color: white !important;
-        }
-
-        .btn-light-custom:hover {
-            background-color: #B62727 !important;
-            border-color: #B62727 !important;
-        }
-    </style>
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css"> -->
+    <link rel="stylesheet" href="/css/style.css" >
 </head>
 <body class="bg-light">
     <!-- NavBar -->
@@ -71,5 +21,6 @@
         </nav>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <%- include("fragments/footer") %>
 </body>
 </html>
