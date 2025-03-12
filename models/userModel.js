@@ -1,5 +1,7 @@
 // models/userModel.js
 const db = require('../config/database');
+const bcrypt = require('bcrypt');
+const { salt_rounds } = require('../config/config');
 
 const nombreTabla = 'usuarios';
 
@@ -38,12 +40,12 @@ const User = {
     
 
     registro: async ({ username,  password }) => {
-        //const { username, email, password } = body;
         console.log('Datos recibidos en el modelo:', { username, password });
 
         try {
             const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
-            return await db.query(sql, [username,  password]);
+            const hashed_password = password;//await bcrypt.hash(password, salt_rounds);
+            return await db.query(sql, [username,  hashed_password]);
         } catch (error) {
             console.log(error);
             throw new Error('registro Error al crear el usuario');
