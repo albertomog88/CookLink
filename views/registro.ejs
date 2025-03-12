@@ -5,65 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url('https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/es/cms/SEO/recipes/ensalada_de_judias_con_jamon_y_langostinos.jpeg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(116, 112, 112, 0.5);
-            z-index: -1;
-        }
-
-        .content {
-            margin-top: 80px;
-        }
-
-        .btn-primary {
-            background-color: #9B1C1C !important;
-            border-color: #9B1C1C !important;
-            color: white !important;
-        }
-
-        .btn-primary:hover {
-            background-color: #7E1616 !important;
-            border-color: #7E1616 !important;
-        }
-
-        .card {
-            background-color: #F5E1DA !important;
-            border: none;
-        }
-
-        .card-header {
-            background-color: #9B1C1C !important;
-            color: white !important;
-        }
-
-        .form-control {
-            border-color: #D22F2F !important;
-        }
-
-        .form-control:focus {
-            border-color: #9B1C1C !important;
-            box-shadow: 0 0 5px rgba(155, 28, 28, 0.5);
-        }
-
-    </style>
-
-
+    <link rel="stylesheet" href="/css/style.css" >
 </head>
 <body class="bg-light">
-    <!-- NavBar -->
-    <%- include("fragments/nav") %>
-    <!--  -->
+    <div>
+        <%- include("fragments/nav") %>
+    </div>
         
     <div class="container content py-5">
         <div class="row justify-content-center">
@@ -95,7 +42,7 @@
                                 <div class="invalid-feedback">Debes confirmar la contraseña</div>
                             </div>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Registrarse</button>
+                                <button type="submit" class="btn btn-custom">Registrarse</button>
                             </div>
                         </form>
                     </div>
@@ -131,5 +78,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div>
+        <%- include("fragments/footer") %>
+    </div>
 </body>
 </html>

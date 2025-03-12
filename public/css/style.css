@@ -1,0 +1,118 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background: url('https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/es/cms/SEO/recipes/ensalada_de_judias_con_jamon_y_langostinos.jpeg') 
+        no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(82, 76, 74, 0.5);
+    z-index: -1;
+}
+
+.content {
+    flex: 1;
+    margin-top: 80px;
+}
+
+
+h1 {
+    background: #8C4A3D;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+.btn-custom {
+    background-color: #A25E4B !important;
+    border-color: #A25E4B !important;
+    color: white !important;
+}
+
+.btn-custom:hover {
+    background-color: #8C4A3D !important;
+    border-color: #8C4A3D !important;
+}
+
+.btn-light-custom {
+    background-color: #C78975 !important;
+    border-color: #C78975 !important;
+    color: white !important;
+}
+
+.btn-light-custom:hover {
+    background-color: #A25E4B !important;
+    border-color: #A25E4B !important;
+}
+
+.card {
+    background-color: #EBD4C3 !important;
+    border: 1px solid #A25E4B !important;
+}
+
+.card-header {
+    background-color: #8C4A3D !important;
+    color: #EBD4C3 !important;
+}
+
+.form-control {
+    border-color: #A25E4B !important;
+}
+
+.form-control:focus {
+    border-color: #8C4A3D !important;
+    box-shadow: 0 0 5px rgba(140, 74, 61, 0.5);
+}
+
+.navbar {
+    background-color: #8C4A3D !important;
+    color: white !important;
+}
+
+.footer {
+    background-color: #8C4A3D; 
+    color: #EBD4C3; 
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-nav a {
+    color: #EBD4C3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-nav a:hover {
+    color: #C78975; 
+}
