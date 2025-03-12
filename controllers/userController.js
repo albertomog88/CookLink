@@ -42,8 +42,12 @@ exports.registroUser = async (req, res, next) => {
         //  return res.render('registro', { 
         //      mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
         //  });
+        
+        console.log("Error details: ", JSON.stringify(errors.array(), null, 2));
+//mensajeError: errors.array().map(err => err.msg).join('. ') 
         return renderView(res, 'registro', { 
-            mensajeError: errors.array().map(err => err.msg).join('. ') 
+            mensajeError: errors.array(),
+            // 
         });
      }
     
