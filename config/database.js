@@ -23,5 +23,6 @@ const pool = mysql.createPool(connectionConf);
 
 
 pool.query = util.promisify(pool.query);
+pool.end = util.promisify(pool.end);
 
 module.exports = pool;
