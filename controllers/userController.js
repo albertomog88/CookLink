@@ -57,6 +57,7 @@ exports.registroUser = async (req, res, next) => {
         console.log(req.body);
         
         await UserService.registroUser(req.body);
+
         //res.redirect('/users');
         res.status(200);
         renderView(res, 'registro', { mensajeExito: "Usuario registrado correctamente." });
@@ -67,8 +68,17 @@ exports.registroUser = async (req, res, next) => {
         // res.render('registro', 
         //     { 
         //         mensajeError: err.message}); // Renderiza la vista con el error
+        // Aquí gestionamos el error, si el error es 'El usuario ya existe', lo mostramos de forma adecuada
+        if (err.message === 'El usuario ya existe') {
+            res.status(400);
+            console.log("Error details2: ", JSON.stringify(errors.array(), null, 2));
+            errors.errors.push({ msg: err.message });
+            return renderView(res, 'registro', { 
+                mensajeError: errors.array() // Enviar un array con el mensaje de error
+            });
+        }
         res.status(500);
-        renderView(res, 'registro', { mensajeError: err.message });
+        renderView(res, 'registro', { mensajeError: [err.message] });
     }
 };
 
