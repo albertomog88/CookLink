@@ -1,15 +1,10 @@
-require("dotenv").config();
 const assert = require("assert");
-const db = require("../config/database");
+const { deleteUsers } = require("./testUtils");
 const User = require("../models/userModel");
 
-const deleteUsers = async () => {
-  await db.query("DELETE FROM usuarios");
-}
 describe("Registro usuario", () => {
-  beforeEach(deleteUsers);
+  before(deleteUsers);
   afterEach(deleteUsers);
-  after(async () => await db.end());
   
   it("Debe registrar correctamente un usuario nuevo con contraseña correcta", () => {
     const usuario = {

@@ -31,13 +31,14 @@ loadRoutes(app);
 app.use(errorHandler);
 
 const port = config.port;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Servidor en ejecución en http://localhost:${port}`);
 });
 
+module.exports = server;
 
-// middlewares/errorHandler.js
+/*// middlewares/errorHandler.js
 module.exports = (err, req, res, next) => {
     console.error(err.stack);
     res.status(err.status || 500).render('error', { error: err.message, status: err.status || 500 });
-};
+};*/

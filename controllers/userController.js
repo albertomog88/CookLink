@@ -35,16 +35,16 @@ exports.toRegistro = async (req, res, next) => {
 
 
 exports.registroUser = async (req, res, next) => {
-    
+
      // Capturar errores de validación
      const errors = validationResult(req);
      if (!errors.isEmpty()) {
         //  return res.render('registro', { 
         //      mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
         //  });
-        
         console.log("Error details: ", JSON.stringify(errors.array(), null, 2));
 //mensajeError: errors.array().map(err => err.msg).join('. ') 
+        res.status(400);
         return renderView(res, 'registro', { 
             mensajeError: errors.array(),
             // 
@@ -58,6 +58,7 @@ exports.registroUser = async (req, res, next) => {
         
         await UserService.registroUser(req.body);
         //res.redirect('/users');
+        res.status(200);
         renderView(res, 'registro', { mensajeExito: "Usuario registrado correctamente." });
 
     } catch (err) {
@@ -66,6 +67,7 @@ exports.registroUser = async (req, res, next) => {
         // res.render('registro', 
         //     { 
         //         mensajeError: err.message}); // Renderiza la vista con el error
+        res.status(500);
         renderView(res, 'registro', { mensajeError: err.message });
     }
 };
