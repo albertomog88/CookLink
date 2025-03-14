@@ -29,7 +29,7 @@ app.use(errorHandler);
 
 const port = config.port;
 const server = app.listen(port, () => {
-	console.log(`Servidor en ejecución en http://localhost:${port}`);
+	console.log(`Servidor en ejecución en http://${config.baseUrl}:${port}`);
 });
 
 module.exports = server;

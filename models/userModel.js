@@ -29,12 +29,12 @@ const User = {
 		}
 	},
 	registro: async ({ username, password }) => {
-		console.log("Datos recibidos en el modelo:", { username, password });
-
 		try {
 			const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
 			const hashedPassword = await bcrypt.hash(password, saltRounds);
-			return await db.query(sql, [username, hashedPassword]);
+			return db.query(sql, [username, hashedPassword]);
+
+			// Return res.affectedRows;
 		}
 		catch (error) {
 			console.log(error);

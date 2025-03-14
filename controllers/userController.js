@@ -36,6 +36,7 @@ exports.toRegistro = (req, res, next) => {
 };
 
 exports.registroUser = async (req, res) => {
+	console.log("hola");
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log("Error details: ", JSON.stringify(errors.array(), null));

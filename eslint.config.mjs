@@ -88,7 +88,8 @@ export default [
 			"no-var": "error",
 			"prefer-arrow-callback": "error",
 			"prefer-const": "error",
-			"prefer-template": "warn"
+			"prefer-template": "warn",
+			"no-unused-vars": ["error", {caughtErrors: "none"}]
 		}
 	}
 ];
