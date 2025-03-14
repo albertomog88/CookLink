@@ -180,4 +180,22 @@ describe("Rutas de usuario", () => {
 
     assert.equal(res.status, 400); 
   })
+
+  it("No debe registrar un usuario con una contraseña vacía", async ()=>{
+    const usuario = {
+      username: "Victor",
+      password: "",
+      confirm_password: ""
+    };
+
+    const res = await fetch(route, {
+      method: "POST",
+      body: JSON.stringify(usuario),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+
+    assert.equal(res.status, 400); 
+  })
 });
