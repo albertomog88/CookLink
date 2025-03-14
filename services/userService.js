@@ -9,7 +9,7 @@ const UserService = {
 			throw error;
 		}
 
-		// 1 Comprobamos si el usuario ya existe
+		// Comprobamos si el usuario ya existe
 		const usuarioExistente = await User.getByUsername(user.username);
 		if (usuarioExistente) {
 			console.log(`usuarioExistente: ${usuarioExistente.username}`);
