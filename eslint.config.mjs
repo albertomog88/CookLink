@@ -66,7 +66,7 @@ export default [
 			"no-array-constructor": "error",
 			"no-lonely-if": "error",
 			"no-multi-assign": "error",
-			"no-multiple-empty-lines": ["error", {"maxEOF": 1 }],
+			"no-multiple-empty-lines": ["error", {"max": 2, "maxEOF": 1, "maxBOF": 0}],
 			"no-nested-ternary": "error",
 			"no-trailing-spaces": "error",
 			"no-unneeded-ternary": "error",
