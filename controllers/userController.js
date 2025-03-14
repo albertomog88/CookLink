@@ -70,7 +70,7 @@ exports.registroUser = async (req, res, next) => {
         //         mensajeError: err.message}); // Renderiza la vista con el error
         // Aquí gestionamos el error, si el error es 'El usuario ya existe', lo mostramos de forma adecuada
         if (err.message === 'El usuario ya existe') {
-            res.status(400);
+            res.status(409);
             console.log("Error details2: ", JSON.stringify(errors.array(), null, 2));
             errors.errors.push({ msg: err.message });
             return renderView(res, 'registro', { 

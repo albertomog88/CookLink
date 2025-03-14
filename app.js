@@ -16,9 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logRoutes);
 
 
-
-
-
 // Configurar Express y motor de vistas
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
