@@ -1,6 +1,6 @@
 // controllers/userController.js
 const UserService = require('../services/userService');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 const { renderView } = require('../middlewares/viewHelper'); // Importamos la función centralizada
 
 exports.getAllUsers = async (req, res, next) => {
@@ -22,77 +22,46 @@ exports.createUser = async (req, res, next) => {
         
     }
 };
-//rEDICECCION A LA PAGINA DE REGISTRO
+
+// Redireccion a la pagina de registro
 exports.toRegistro = async (req, res, next) => {
     try {
-        //res.render('registro', { mensajeError: null });
-        renderView(res, 'registro');
+        renderView(res, 'registro', 200);
     } catch (err) {
         next(err);
     }
 };
 
-
-
 exports.registroUser = async (req, res, next) => {
-
-     // Capturar errores de validación
-     const errors = validationResult(req);
-     if (!errors.isEmpty()) {
-        //  return res.render('registro', { 
-        //      mensajeError: errors.array().map(err => err.msg).join('. ') // Unir todos los errores en una sola cadena
-        //  });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
         console.log("Error details: ", JSON.stringify(errors.array(), null, 2));
-//mensajeError: errors.array().map(err => err.msg).join('. ') 
-        res.status(400);
-        return renderView(res, 'registro', { 
-            mensajeError: errors.array(),
-            // 
+
+        return renderView(res, 'registro', 400, { 
+            mensajeError: errors.array()
         });
-     }
+    }
     
     try {
-        
-        const { username, email, password } = req.body;
         console.log(req.body);
         
         await UserService.registroUser(req.body);
+        renderView(res, 'registro', 200, { mensajeExito: "Usuario registrado correctamente." });
 
-        //res.redirect('/users');
-        res.status(200);
-        renderView(res, 'registro', { mensajeExito: "Usuario registrado correctamente." });
-
-    } catch (err) {
-        
+    } catch (err) {      
         console.error("Error al crear usuario:", err.message);
-        // res.render('registro', 
-        //     { 
-        //         mensajeError: err.message}); // Renderiza la vista con el error
-        // Aquí gestionamos el error, si el error es 'El usuario ya existe', lo mostramos de forma adecuada
+
         if (err.message === 'El usuario ya existe') {
-            res.status(409);
             console.log("Error details2: ", JSON.stringify(errors.array(), null, 2));
             errors.errors.push({ msg: err.message });
-            return renderView(res, 'registro', { 
+            return renderView(res, 'registro', 409, { 
                 mensajeError: errors.array() // Enviar un array con el mensaje de error
             });
         }
-        res.status(500);
-        renderView(res, 'registro', { mensajeError: [err.message] });
+
+        renderView(res, 'registro', 500, { mensajeError: [err.message] });
     }
 };
-
-
-
-// exports.deleteUser = async (req, res, next) => {
-//     try {
-//         const { id } = req.params;
-//         await UserService.deleteUser(id);
-//         res.redirect('/users');
-//     } catch (err) {
-//         next(err);
-//     }
-// };
 
 exports.deleteUser = async (req, res, next) => {
     try {
@@ -102,6 +71,6 @@ exports.deleteUser = async (req, res, next) => {
     } catch (err) {
       next(err);
     }
-  };
+};
   
 

@@ -14,31 +14,18 @@ const User = {
             throw Error('Error al obtener todos los usuarios');
         }
     },
-    create: async (user) => {
-        try {
-            return await db.query(`INSERT INTO ${nombreTabla} SET ?`, user);
-        } catch (error) {
-            console.log(error);
-            throw new Error('CREATE Error al crear el usuario');
-        }
-    },
-
     //getByUsername
     getByUsername: async (username) => {
         try {
             console.log('Datos recibidos en el modelo:', { username });
             const sql = `SELECT username FROM ${nombreTabla} WHERE username = ?`;
-            //const [result] = await db.query(sql, [username]); // Destructuring para obtener solo el resultado
-            return await db.query(sql, [username]);; 
+            const [result] = await db.query(sql, [username]); // Destructuring para obtener solo el resultado
+            return result; 
         } catch (error) {
             console.log(error);
             throw new Error('Error al buscar usuario');
         }
     },
-    
-    
-    
-
     registro: async ({ username,  password }) => {
         console.log('Datos recibidos en el modelo:', { username, password });
 
