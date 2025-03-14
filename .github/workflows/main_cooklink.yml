@@ -37,8 +37,8 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           PORT: ${{ secrets.DB_PORT }}
           MODE: ${{ secrets.MODE }}
-          SALT_ROUNDS: ${{ secret.SALT_ROUNDS }}
-          BASE_URL: ${{ secret.BASE_URL }}
+          SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: npm run test
         
       - name: Zip artifact for deployment
