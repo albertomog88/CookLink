@@ -36,11 +36,9 @@ exports.toRegistro = (req, res, next) => {
 };
 
 exports.registroUser = async (req, res) => {
-	console.log("hola");
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log("Error details: ", JSON.stringify(errors.array(), null));
-
 		return renderView(res, "registro", badRequest, {mensajeError: errors.array()});
 	}
 
@@ -76,5 +74,3 @@ exports.deleteUser = async (req, res, next) => {
 		next(err);
 	}
 };
-
-

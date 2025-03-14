@@ -18,7 +18,7 @@ const User = {
 	// GetByUsername
 	getByUsername: async username => {
 		try {
-			console.log("Datos recibidos en el modelo:", { username });
+			// Console.log("Datos recibidos en el modelo:", { username });
 			const sql = `SELECT username FROM ${nombreTabla} WHERE username = ?`;
 			const [ result ] = await db.query(sql, [ username ]); // Destructuring para obtener solo el resultado
 			return result;
@@ -33,8 +33,6 @@ const User = {
 			const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
 			const hashedPassword = await bcrypt.hash(password, saltRounds);
 			return db.query(sql, [username, hashedPassword]);
-
-			// Return res.affectedRows;
 		}
 		catch (error) {
 			console.log(error);
