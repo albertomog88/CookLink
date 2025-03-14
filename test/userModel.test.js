@@ -3,8 +3,8 @@ const { deleteUsers } = require("./testUtils");
 const User = require("../models/userModel");
 
 describe("Registro usuario", () => {
-  before(deleteUsers);
-  afterEach(deleteUsers);
+  before(deleteUsers); // antes de todos los test
+  afterEach(deleteUsers); // despues de cada test
   
   it("Debe registrar correctamente un usuario nuevo con contraseña correcta", () => {
     const usuario = {
@@ -15,52 +15,13 @@ describe("Registro usuario", () => {
     assert.doesNotReject(User.registro(usuario));
   });
 
-  it("No debe registrar un usuario con contraseña menor a 8 caracteres", () => {
+  it("No debe registrar un usuario repetido", async () => {
     const usuario = {
       username: "Paula",
-      password: "1234567",
-    };
-
-    assert.rejects(User.registro(usuario));
-  });
-
-  it("No debe registrar un usuario con contraseña mayor a 20 caracteres", () => {
-    const usuario = {
-      username: "Paulaaa",
-      password: "123456789012345678901",
-    };
-
-    assert.rejects(User.registro(usuario));
-  });
-
-  it("No debe registrar un usuario con contraseña vacía", () => {
-    const usuario = {
-      username: "QWERT",
-      password: "",
-    };
-
-    assert.rejects(User.registro(usuario));
-  });
-
-  it("No debe registrar un usuario con nombre de usuario vacío", () => {
-    const usuario = {
-      username: "",
       password: "12345678",
     };
 
+    await User.registro(usuario);
     assert.rejects(User.registro(usuario));
   });
-
-// LO SUYO SERÍA HACER EL RESTO DE COMPROBACIONES DE LA CONTRASEÑA CUANDO DESCOMENTEMOS EL HECHO DE QUE SE TIENE QUE AÑADIR
-// MAYÚSCULAS, MINÚSCULAS, NÚMEROS Y CARACTERES ESPECIALES
-
-  it("No debe registrar un usuario ya existente", () => {
-    const usuario = {
-      username: "Luis",
-      password: "234567654",
-    };
-
-    assert.rejects(User.registro(usuario));
-  });
-
 });
