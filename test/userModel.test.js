@@ -45,4 +45,33 @@ describe("Registro usuario", () => {
 
 		assert.ok(good);
 	});
+
+	it("No debe registrar un usuario sin nombre", async () => {
+		const usuario = { password: "12345678" };
+
+		let good = false;
+		try {
+			await User.registro(usuario);
+		}
+		catch (err) {
+			good = true;
+		}
+
+		assert.ok(good);
+	});
+
+	it("No debe registrar un usuario sin contraseña", async () => {
+		const usuario = { username: "Paula" };
+
+		let good = false;
+		try {
+			await User.registro(usuario);
+		}
+		catch (err) {
+			console.log(err);
+			good = true;
+		}
+
+		assert.ok(good);
+	});
 });

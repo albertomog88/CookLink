@@ -22,7 +22,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, ok); // 200 es el codigo de que todo ha ido bien
@@ -38,7 +38,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest); // 400 es el codigo de que la petición era invalida
@@ -54,7 +54,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -71,7 +71,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -88,13 +88,13 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		const res2 = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, ok);
@@ -111,7 +111,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -127,7 +127,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -143,7 +143,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -159,7 +159,7 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
@@ -175,9 +175,54 @@ describe("Rutas de usuario", () => {
 		const res = await fetch(route, {
 			method: "POST",
 			body: JSON.stringify(usuario),
-			headers: {"Content-Type": "application/json"}
+			headers: { "Content-Type": "application/json" }
 		});
 
 		assert.equal(res.status, badRequest);
+	});
+
+	it("No debe registrar un usuario sin contraseña", async () => {
+		const usuario = {
+			username: "Luis",
+			confirm_password: "12345679Aa:"
+		};
+
+		const res = await fetch(route, {
+			method: "POST",
+			body: JSON.stringify(usuario),
+			headers: { "Content-Type": "application/json" }
+		});
+
+		assert.equal(res.status, badRequest); // 400 es el codigo de que la petición era invalida
+	});
+
+	it("No debe registrar un usuario sin confirmacion de contraseña", async () => {
+		const usuario = {
+			username: "Luis",
+			password: "12345679Aa:"
+		};
+
+		const res = await fetch(route, {
+			method: "POST",
+			body: JSON.stringify(usuario),
+			headers: { "Content-Type": "application/json" }
+		});
+
+		assert.equal(res.status, badRequest); // 400 es el codigo de que la petición era invalida
+	});
+
+	it("No debe registrar un usuario sin nombre", async () => {
+		const usuario = {
+			password: "12345679Aa:",
+			confirm_password: "12345679Aa:"
+		};
+
+		const res = await fetch(route, {
+			method: "POST",
+			body: JSON.stringify(usuario),
+			headers: { "Content-Type": "application/json" }
+		});
+
+		assert.equal(res.status, badRequest); // 400 es el codigo de que la petición era invalida
 	});
 });

@@ -39,7 +39,7 @@ exports.registroUser = async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log("Error details: ", JSON.stringify(errors.array(), null));
-		return renderView(res, "registro", badRequest, {mensajeError: errors.array()});
+		return renderView(res, "registro", badRequest, { mensajeError: errors.array() });
 	}
 
 	try {

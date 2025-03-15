@@ -35,7 +35,7 @@ const User = {
 			return db.query(sql, [username, hashedPassword]);
 		}
 		catch (error) {
-			console.log(error);
+			console.log(error.message);
 			throw new Error("registro Error al crear el usuario");
 		}
 	},
