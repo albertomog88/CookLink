@@ -6,7 +6,7 @@ const User = require("../models/userModel");
 
 describe("Registro usuario", () => {
 	before(deleteUsers); // Antes de todos los test
-	afterEach(deleteUsers); // Despues de cada test
+	beforeEach(deleteUsers); // Despues de cada test
 
 	it("Debe registrar correctamente un usuario nuevo con contraseña correcta", async () => {
 		const usuario = {
@@ -62,6 +62,42 @@ describe("Registro usuario", () => {
 
 	it("No debe registrar un usuario sin contraseña", async () => {
 		const usuario = { username: "Paula" };
+
+		let good = false;
+		try {
+			await User.registro(usuario);
+		}
+		catch (err) {
+			console.log(err);
+			good = true;
+		}
+
+		assert.ok(good);
+	});
+
+	it("No debe registrar un usuario con nombre vacio", async () => {
+		const usuario = {
+			username: "",
+			password: "12345678"
+		};
+
+		let good = false;
+		try {
+			await User.registro(usuario);
+		}
+		catch (err) {
+			console.log(err);
+			good = true;
+		}
+
+		assert.ok(good);
+	});
+
+	it("No debe registrar un usuario con contraseña vacia", async () => {
+		const usuario = {
+			username: "Paula",
+			password: ""
+		};
 
 		let good = false;
 		try {
