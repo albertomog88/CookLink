@@ -1,11 +1,24 @@
+const { badRequest, conflict } = require("../config/httpcodes");
 const User = require("../models/userModel");
 
 const UserService = {
 	getAllUsers: () => User.getAll(),
 	registroUser: async user => {
-		if (!user) {
-			const error = new Error("Sin dato");
-			error.status = 400;
+		if (!user.username) {
+			const error = new Error("Falta el nombre de usuario");
+			error.status = badRequest;
+			throw error;
+		}
+
+		if (!user.password) {
+			const error = new Error("Falta la contraseña");
+			error.status = badRequest;
+			throw error;
+		}
+
+		if (!user.confirm_password) {
+			const error = new Error("Falta la contraseña");
+			error.status = badRequest;
 			throw error;
 		}
 
@@ -14,10 +27,10 @@ const UserService = {
 		if (usuarioExistente) {
 			console.log(`usuarioExistente: ${usuarioExistente.username}`);
 			const error = new Error("El usuario ya existe");
-			error.status = 409;
-			throw error; // Aquí solo lanzamos el error
+			error.status = conflict;
+			throw error;
 		}
-		// Si no existe, procedemos con el registro
+
 		return User.registro(user);
 	},
 	deleteUser: id => User.delete(id)

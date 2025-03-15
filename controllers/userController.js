@@ -1,7 +1,7 @@
 const UserService = require("../services/userService");
 const { validationResult } = require("express-validator");
 const { renderView } = require("../middlewares/viewHelper"); // Importamos la función centralizada
-const { ok, badRequest, conflict, internalServerError } = require("../config/httpcodes");
+const { ok, badRequest, conflict } = require("../config/httpcodes");
 
 exports.getAllUsers = async (req, res, next) => {
 	try {
@@ -51,7 +51,9 @@ exports.registroUser = async (req, res) => {
 	}
 	catch (err) {
 		console.error("Error al crear usuario:", err.message);
-		if (err.message === "El usuario ya existe") {
+
+		// CHECK este if seguramente sobre
+		if (err.status === conflict) {
 			console.log("Error details2: ", JSON.stringify(errors.array(), null));
 			errors.errors.push({ msg: err.message });
 			return renderView(res, "registro", conflict, {
@@ -60,7 +62,7 @@ exports.registroUser = async (req, res) => {
 			});
 		}
 
-		renderView(res, "registro", internalServerError, { mensajeError: [ err.message ] });
+		renderView(res, "registro", err.status, { mensajeError: [ err.message ] });
 	}
 };
 

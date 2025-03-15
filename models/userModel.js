@@ -32,7 +32,7 @@ const User = {
 		try {
 			const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
 			const hashedPassword = await bcrypt.hash(password, saltRounds);
-			return db.query(sql, [username, hashedPassword]);
+			return db.query(sql, [ username, hashedPassword ]);
 		}
 		catch (error) {
 			console.log(error.message);
