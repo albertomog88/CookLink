@@ -4,10 +4,9 @@
 
 CREATE TABLE usuarios (
   id int AUTO_INCREMENT PRIMARY KEY,
-  username varchar(50) NOT NULL UNIQUE CHECK (REPLACE(username, " ", "") != ""),
-  password varchar(255) NOT NULL CHECK (REPLACE(password, " ", "") != "")
+  username varchar(50) NOT NULL UNIQUE CHECK (TRIM(username) != "" AND username NOT LIKE "% %"),
+  password varchar(255) NOT NULL CHECK (TRIM(password) != "" AND password NOT LIKE "% %")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Volcado de datos para la tabla usuarios
 --
