@@ -73,6 +73,7 @@ export default [
 			"no-whitespace-before-property": "error",
 			"nonblock-statement-body-position": "warn",
 			"object-curly-newline": ["error", { "multiline": true }],
+			"object-curly-spacing": ["error", "always"],
 			quotes: ["error", "double", { "allowTemplateLiterals": true }],
 			semi: "error",
 			"semi-spacing": "error",
