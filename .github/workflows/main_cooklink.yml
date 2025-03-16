@@ -35,7 +35,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}
-          PORT: ${{ secrets.DB_PORT }}
+          PORT: ${{ secrets.PORT }}
           MODE: ${{ secrets.MODE }}
           SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
           BASE_URL: ${{ secrets.BASE_URL }}
