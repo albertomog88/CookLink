@@ -1,5 +1,5 @@
 const { badRequest, conflict } = require("../config/httpcodes");
-const AppError = require("../middlewares/AppError");
+const AppError = require("../utils/AppError");
 const User = require("../models/userModel");
 
 const UserService = {
