@@ -31,6 +31,18 @@ const UserService = {
 			throw error;
 		}
 
+		if (/[\s\t]/.test(user.username)) {
+			const error = new Error("El nombre de usuario tiene espacios");
+			error.status = 400;
+			throw error;
+		}
+
+		if (/[\s\t]/.test(user.password)) {
+			const error = new Error("La contraseña tiene espacios");
+			error.status = 400;
+			throw error;
+		}
+
 		return User.registro(user);
 	},
 	deleteUser: id => User.delete(id)

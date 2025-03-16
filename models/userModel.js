@@ -30,6 +30,8 @@ const User = {
 	},
 	registro: async ({ username, password }) => {
 		try {
+			if (username === "" || /[\s\t]/.test(username)) throw new Error();
+			if (password === "" || /[\s\t]/.test(password)) throw new Error();
 			const sql = `INSERT INTO ${nombreTabla} (username, password) VALUES (?, ?)`;
 			const hashedPassword = await bcrypt.hash(password, saltRounds);
 			return db.query(sql, [ username, hashedPassword ]);
