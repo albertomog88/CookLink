@@ -1,43 +1,26 @@
-// services/userService.js
-const User = require('../models/userModel');
+const { badRequest, conflict } = require("../config/httpcodes");
+const AppError = require("../utils/AppError");
+const User = require("../models/userModel");
 
 const UserService = {
-    getAllUsers: async () => {
-        return await User.getAll();
-    },
-    createUser: async (name) => {
-        if (!name) {
-            const error = new Error('El nombre es obligatorio');
-            error.status = 400;
-            throw error;
-        }
-        return await User.create({ name });
-    },
+	getAllUsers: () => User.getAll(),
+	registroUser: async user => {
+		if (!user.username) throw new AppError("Falta el nombre de usuario", badRequest);
+		if (!user.password) throw new AppError("Falta la contraseña", badRequest);
+		if (!user.confirm_password) throw new AppError("Falta la contraseña", badRequest);
+		if (/[\s\t]/.test(user.username)) throw new AppError("El nombre de usuario tiene espacios", badRequest);
+		if (/[\s\t]/.test(user.password)) throw new AppError("La contraseña tiene espacios", badRequest);
 
+		// Comprobamos si el usuario ya existe
+		const usuarioExistente = await User.getByUsername(user.username);
+		if (usuarioExistente) {
+			console.log(`usuarioExistente: ${usuarioExistente.username}`);
+			throw new AppError("El usuario ya existe", conflict);
+		}
 
-    registroUser: async (body) => {
-        //console.log("SERVICE" +body);
-        if (!body) {
-            const error = new Error('Sin dato');
-            error.status = 400;
-            throw error;
-        }
-        //1 Comprobamos si el usuario ya existe
-        const usuarioExistente = await User.getByUsername(body.username);
-        console.log("usuarioExistente" +usuarioExistente);
-        if (usuarioExistente.length > 0) {
-            const error = new Error('El usuario ya existe');
-            error.status = 409;
-            throw error; // Aquí solo lanzamos el error
-        }
-        // Si no existe, procedemos con el registro
-        return await User.registro( body);
-    },
-    
-    
-    deleteUser: async (id) => {
-        return await User.delete(id);
-    }
+		return User.registro(user);
+	},
+	deleteUser: id => User.delete(id)
 };
 
 module.exports = UserService;

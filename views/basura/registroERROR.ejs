@@ -13,21 +13,7 @@
         <%- include("fragments/nav") %>
     </div>
         
-    
     <div class="container content py-5">
-        <% if (mensajeError && mensajeError.length > 0) { %>
-            <div class="alert alert-danger row justify-content-center">
-                <ul>
-                    <% mensajeError.forEach(function(error) { %>
-                        <li><%= error.msg %></li>
-                    <% }); %>
-                </ul>
-            </div>
-        <% } %>
-        
-        <% if (mensajeExito) { %>
-            <div class="alert alert-success"><%= mensajeExito %></div>
-        <% } %>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg">
@@ -35,14 +21,16 @@
                         <h4>Registro de Usuario</h4>
                     </div>
                     <div class="card-body">
-
-                        
                         <form action="/users/registro" method="POST" class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de Usuario</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Introduce tu nombre de usuario" required>
                                 <div class="invalid-feedback">El nombre de usuario es obligatorio</div>
-                                
+                                <% if (mensajeExito) { %>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                <% } %>
                             </div>
                             <!-- <div class="mb-3">
                                 <label for="email" class="form-label">Correo Electrónico</label>
@@ -51,16 +39,40 @@
                             </div> -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Introduce tu contraseña" required>
-                                <div class="invalid-feedback">La contraseña es obligatoria</div>
-                                
+                                <input type="password" name="password" id="password" class="form-control
+                                    <%= mensajeError && mensajeError.some(e => e.path === 'password') ? 'is-invalid' : (mensajeExito ? 'is-valid' : '') %>"
+                                    placeholder="Introduce tu contraseña" required>
+                                <% if (mensajeError && mensajeError.some(e => e.path === 'password')) { %>
+                                    <div class="invalid-feedback">
+                                        <% mensajeError.filter(e => e.path === 'password').forEach(error => { %>
+                                            <%= error.msg %><br>
+                                        <% }); %>
+                                    </div>
+                                <% } %>
+                                <% if (mensajeExito) { %>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                <% } %>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
-                                <input type="password" name="confirm_password" id="confirm_password" class="form-control"
+                                <input type="password" name="confirm_password" id="confirm_password" class="form-control
+                                    <%= mensajeError && mensajeError.some(e => e.path === 'confirm_password') ? 'is-invalid' : (mensajeExito ? 'is-valid' : '') %>"
                                     placeholder="Confirma tu contraseña" required>
-                                <div class="invalid-feedback">La confirmacion de la contraseña es obligatoria</div>
+                                <% if (mensajeError && mensajeError.some(e => e.path === 'confirm_password')) { %>
+                                    <div class="invalid-feedback">
+                                        <% mensajeError.filter(e => e.path === 'confirm_password').forEach(error => { %>
+                                            <%= error.msg %><br>
+                                        <% }); %>
+                                    </div>
+                                <% } %>
+                                <% if (mensajeExito) { %>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                <% } %>
                             </div>
                             
                             
@@ -76,7 +88,19 @@
 
     
 
+    <!-- <% if (mensajeError && mensajeError.length > 0) { %>
+        <div class="alert alert-danger">
+            <ul>
+                <% mensajeError.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } %>
     
+    <% if (mensajeExito) { %>
+        <div class="alert alert-success"><%= mensajeExito %></div>
+    <% } %> -->
 
     <script>
             (() => {
