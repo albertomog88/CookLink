@@ -1,46 +1,21 @@
 const { badRequest, conflict } = require("../config/httpcodes");
+const AppError = require("../middlewares/AppError");
 const User = require("../models/userModel");
 
 const UserService = {
 	getAllUsers: () => User.getAll(),
 	registroUser: async user => {
-		if (!user.username) {
-			const error = new Error("Falta el nombre de usuario");
-			error.status = badRequest;
-			throw error;
-		}
-
-		if (!user.password) {
-			const error = new Error("Falta la contraseña");
-			error.status = badRequest;
-			throw error;
-		}
-
-		if (!user.confirm_password) {
-			const error = new Error("Falta la contraseña");
-			error.status = badRequest;
-			throw error;
-		}
+		if (!user.username) throw new AppError("Falta el nombre de usuario", badRequest);
+		if (!user.password) throw new AppError("Falta la contraseña", badRequest);
+		if (!user.confirm_password) throw new AppError("Falta la contraseña", badRequest);
+		if (/[\s\t]/.test(user.username)) throw new AppError("El nombre de usuario tiene espacios", badRequest);
+		if (/[\s\t]/.test(user.password)) throw new AppError("La contraseña tiene espacios", badRequest);
 
 		// Comprobamos si el usuario ya existe
 		const usuarioExistente = await User.getByUsername(user.username);
 		if (usuarioExistente) {
 			console.log(`usuarioExistente: ${usuarioExistente.username}`);
-			const error = new Error("El usuario ya existe");
-			error.status = conflict;
-			throw error;
-		}
-
-		if (/[\s\t]/.test(user.username)) {
-			const error = new Error("El nombre de usuario tiene espacios");
-			error.status = 400;
-			throw error;
-		}
-
-		if (/[\s\t]/.test(user.password)) {
-			const error = new Error("La contraseña tiene espacios");
-			error.status = 400;
-			throw error;
+			throw new AppError("El usuario ya existe", conflict);
 		}
 
 		return User.registro(user);

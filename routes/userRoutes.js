@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const { check } = require("express-validator");
+const AppError = require("../middlewares/AppError");
+const { badRequest } = require("../config/httpcodes");
 
 // /users
 router.get("/", userController.getAllUsers);
@@ -17,7 +19,7 @@ router.post(
 	check("password", "La longitud máxima de la contraseña es de 50 carácteres").isLength({ max: 50 }),
 	check("confirm_password")
 		.custom((value, { req }) => {
-			if (value !== req.body.password) throw new Error("Las contraseñas no son iguales");
+			if (value !== req.body.password) throw new AppError("Las contraseñas no son iguales", badRequest);
 
 			return true;
 		})
