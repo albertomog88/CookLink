@@ -2,24 +2,28 @@
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE usuarios;
 CREATE TABLE usuarios (
   id int AUTO_INCREMENT PRIMARY KEY,
   username varchar(50) NOT NULL UNIQUE CHECK (TRIM(username) != "" AND username NOT LIKE "% %"),
   password varchar(255) NOT NULL CHECK (TRIM(password) != "" AND password NOT LIKE "% %")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
---
--- Volcado de datos para la tabla usuarios
---
 
-INSERT INTO usuarios (id, username, password) VALUES
-(1, 'usuario1', 'contraseña123'),
-(2, 'juan_perez', 'segura456'),
-(3, 'maria_garcia', 'clave789'),
-(4, 'carlos_lopez', 'secreto321'),
-(5, 'ana_martinez', 'pass1234'),
-(6, 'pedro_rodriguez', 'clave5678'),
-(7, 'laura_sanchez', 'segura9012'),
-(8, 'miguel_fernandez', 'contraseña3456'),
-(9, 'sofia_torres', 'clave7890'),
-(10, 'david_ruiz', 'secreto1234'),
-(11, 'alberto', '1234');
+
+CREATE TABLE recetas (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  nombre varchar(255) NOT NULL UNIQUE,
+  descripcion TEXT
+);
+
+INSERT INTO recetas (nombre, descripcion) VALUES
+  ('Pizza Margherita', 'Deliciosa pizza con tomate, mozzarella y albahaca.'),
+  ('Spaghetti Carbonara', 'Pasta con huevo, queso, panceta y pimienta negra.'),
+  ('Ensalada César', 'Lechuga romana, crutones y aderezo César.'),
+  ('Tacos al Pastor', 'Tortilla con cerdo marinado y piña.'),
+  ('Sushi Roll', 'Arroz, alga nori y pescado fresco en rollo.'),
+  ('Hamburguesa Clásica', 'Carne de res, lechuga, tomate y pan brioche.'),
+  ('Lasagna Boloñesa', 'Capas de pasta con salsa boloñesa y bechamel.'),
+  ('Ceviche de Camarón', 'Camarones marinados en limón con cebolla y cilantro.'),
+  ('Ratatouille', 'Guiso de verduras con berenjena, calabacín y tomate.'),
+  ('Churrasco Argentino', 'Carne asada con chimichurri.');
