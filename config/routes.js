@@ -1,5 +1,6 @@
 const indexRouter = require("../routes/index");
 const userRouter = require("../routes/userRoutes");
+const ingredientRouter = require("../routes/ingredientRoutes");
 const { notFound } = require("./httpcodes");
 
 /**
@@ -10,6 +11,7 @@ const { notFound } = require("./httpcodes");
 module.exports = app => {
 	app.use("/", indexRouter);
 	app.use("/users", userRouter);
+	app.use("/ingredientes", ingredientRouter);
 
 	// Manejo de errores 404
 	app.use((req, res, next) => {
