@@ -1,3 +1,11 @@
+/**
+ * Función para renderizar vistas con datos predefinidos y personalizados.
+ *
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {string} view - Nombre de la vista a renderizar.
+ * @param {number} status - Código de estado HTTP de la respuesta.
+ * @param {Object} [data={}] - Datos adicionales opcionales para la vista.
+ */
 module.exports = {
 	renderView: (res, view, status, data = {}) => {
 		const defaultData = {

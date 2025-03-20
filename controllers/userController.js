@@ -3,6 +3,13 @@ const { validationResult } = require("express-validator");
 const { renderView } = require("../middlewares/viewHelper"); // Importamos la función centralizada
 const { ok, badRequest, conflict } = require("../config/httpcodes");
 
+/**
+ * Obtiene todos los usuarios y los renderiza en la vista "users".
+ *
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP que renderiza la vista con los usuarios.
+ * @param {Function} next - Función para manejar errores.
+ */
 exports.getAllUsers = async (req, res, next) => {
 	try {
 		const users = await UserService.getAllUsers();
@@ -13,6 +20,13 @@ exports.getAllUsers = async (req, res, next) => {
 	}
 };
 
+/**
+ * Crea un nuevo usuario a partir del nombre recibido en la solicitud y redirige a la lista de usuarios.
+ *
+ * @param {Object} req - Objeto de solicitud HTTP con el nombre en `req.body`.
+ * @param {Object} res - Objeto de respuesta HTTP que redirige a la lista de usuarios.
+ * @param {Function} next - Función para manejar errores.
+ */
 exports.createUser = async (req, res, next) => {
 	try {
 		const { name } = req.body;
@@ -25,7 +39,13 @@ exports.createUser = async (req, res, next) => {
 	}
 };
 
-// Redireccion a la pagina de registro
+/**
+ * Redirige a la página de registro de usuario.
+ *
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP que renderiza la vista de registro.
+ * @param {Function} next - Función para manejar errores.
+ */
 exports.toRegistro = (req, res, next) => {
 	try {
 		renderView(res, "registro", ok);
@@ -35,6 +55,12 @@ exports.toRegistro = (req, res, next) => {
 	}
 };
 
+/**
+ * Registra un nuevo usuario en la base de datos y muestra mensajes de éxito o error según el resultado.
+ *
+ * @param {Object} req - Objeto de solicitud HTTP con los datos del usuario en `req.body`.
+ * @param {Object} res - Objeto de respuesta HTTP que renderiza la vista de registro con un mensaje de éxito o error.
+ */
 exports.registroUser = async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -66,6 +92,13 @@ exports.registroUser = async (req, res) => {
 	}
 };
 
+/**
+ * Elimina un usuario de la base de datos por su ID y devuelve una respuesta en formato JSON.
+ *
+ * @param {Object} req - Objeto de solicitud HTTP con el ID del usuario en `req.params.id`.
+ * @param {Object} res - Objeto de respuesta HTTP que devuelve un mensaje de confirmación en JSON.
+ * @param {Function} next - Función para manejar errores.
+ */
 exports.deleteUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
